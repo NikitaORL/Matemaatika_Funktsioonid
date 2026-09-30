@@ -1,0 +1,22 @@
+﻿@model Matemaatika_Funktsioonid.Models.FunktsiooniUurimine
+@{
+    ViewData["Title"] = "Uus funktsioon";
+}
+
+<h1>Uus funktsioon</h1>
+
+<form asp-action="Create">
+    <div class="form-group mb-3">
+        <label asp-for="Valem">Sisesta valem (nt x^3 - 3*x)</label>
+        <input asp-for="Valem" class="form-control" placeholder="x^2 - 4*x + 3" />
+        <span asp-validation-for="Valem" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-success">Analüüsi ja salvesta</button>
+    <a asp-action="Index" class="btn btn-secondary">Tagasi</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

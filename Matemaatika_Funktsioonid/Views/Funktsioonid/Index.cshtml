@@ -1,0 +1,37 @@
+﻿@model IEnumerable<Matemaatika_Funktsioonid.Models.FunktsiooniUurimine>
+@{
+    ViewData["Title"] = "Funktsioonid";
+}
+
+<h1>Funktsioonide nimekiri</h1>
+<p><a asp-action="Create" class="btn btn-primary">+ Lisa uus</a></p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Valem</th>
+            <th>Määramispiirkond</th>
+            <th>Tuletis</th>
+            <th>Ekstreemumid</th>
+            <th>Loodud</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Valem</td>
+                <td>@item.Maaramispiirkond</td>
+                <td>@item.Tuletis</td>
+                <td>@item.Ekstreemumid</td>
+                <td>@item.LuodudAeg.ToString("yyyy-MM-dd HH:mm")</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Vaata</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Muuda</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Kustuta</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

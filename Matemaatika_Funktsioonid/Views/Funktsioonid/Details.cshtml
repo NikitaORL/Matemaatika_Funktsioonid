@@ -1,0 +1,84 @@
+﻿@model Matemaatika_Funktsioonid.Models.FunktsiooniUurimine
+@{
+    ViewData["Title"] = "Detailid";
+}
+
+<h1>f(x) = @Model.Valem</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item"><b>Määramispiirkond:</b> @Model.Maaramispiirkond</li>
+    <li class="list-group-item"><b>Tuletis:</b> @Model.Tuletis</li>
+    <li class="list-group-item"><b>Kriitilised punktid:</b> @Model.KriitilisedPunktid</li>
+    <li class="list-group-item"><b>Ekstreemumid:</b> @Model.Ekstreemumid</li>
+</ul>
+
+<div style="max-width: 900px;">
+    <canvas id="funktsiooniGraafik" width="900" height="450"></canvas>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Tagasi nimekirja</a>
+
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const valem = "@Model.Valem".toLowerCase().replace(/\s/g, "");
+
+        function f(x) {
+            try {
+                let expr = valem.replace(/\^/g, "**");
+                expr = expr.replace(/x/g, `(${x})`);
+                return Function('"use strict";return (' + expr + ')')();
+            } catch { return NaN; }
+        }
+
+        function df(x, h = 0.001) {
+            return (f(x + h) - f(x - h)) / (2 * h);
+        }
+
+        const xV = [], yF = [], yD = [];
+        for (let x = -5; x <= 5; x += 0.1) {
+            xV.push(x.toFixed(2));
+            yF.push(f(x));
+            yD.push(df(x));
+        }
+
+        new Chart(document.getElementById('funktsiooniGraafik'), {
+            type: 'line',
+            data: {
+                labels: xV,
+                datasets: [
+                    {
+                        label: 'f(x) = @Model.Valem',
+                        data: yF,
+                        borderColor: 'blue',
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    },
+                    {
+                        label: "f'(x)",
+                        data: yD,
+                        borderColor: 'red',
+                        borderDash: [6, 4],
+                        borderWidth: 2,
+                        fill: false,
+                        pointRadius: 0,
+                        tension: 0.1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: 'x' } },
+                    y: { title: { display: true, text: 'y' } }
+                },
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: { mode: 'index', intersect: false }
+                }
+            }
+        });
+    </script>
+}
