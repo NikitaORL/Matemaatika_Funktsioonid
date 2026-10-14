@@ -2,7 +2,7 @@ Funktsiooni uurimine — juhend testijale
 Sissejuhatus
 Funktsiooni uurimine on veebirakendus, mis on loodud matemaatiliste funktsioonide automaatseks analüüsiks. Kasutaja sisestab funktsiooni valemi (näiteks x^3 - 6*x + 3) ja rakendus teeb tema eest ära kogu selle rutiinse töö, mida tavaliselt tehakse käsitsi paberil: leiab määramispiirkonna, nullkohad, tuletise, kriitilised punktid ja ekstreemumid, seejärel joonistab graafiku ja näitab samm-sammulist lahendust.
 
-Projekt on loodud õppetöö raames eesmärgiga siduda omavahel matemaatiline analüüs ja tänapäevane veebiarendus. See ei ole mõeldud tootmiskeskkonda — ainult õppimiseks ja testimiseks.
+
 
 1. Mida rakendus teeb
 Rakenduse põhifunktsioonid:
@@ -15,11 +15,6 @@ Arvutab tuletise — rakendus leiab sümboolselt tuletise f'(x) ja näitab seda 
 
 Leiab kriitilised punktid — lahendatakse võrrand f'(x) = 0.
 
-Määrab ekstreemumid — iga kriitilise punkti juures otsustatakse, kas tegemist on lokaalse maksimumi, miinimumi või mitte kummagagi (teise tuletise testi abil).
-
-Joonistab graafiku — Chart.js abil kuvatakse funktsiooni graafik koos telgede, tuletise ja oluliste punktidega.
-
-Haldab funktsioone — kõiki sisestatud funktsioone saab salvestada, nimekirjas vaadata, muuta ja kustutada (täielik CRUD).
 
 2. Kasutatud tehnoloogiad
 Komponent	Tehnoloogia
