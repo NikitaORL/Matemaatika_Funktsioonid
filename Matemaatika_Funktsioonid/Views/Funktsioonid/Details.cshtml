@@ -1,0 +1,132 @@
+﻿@model Matemaatika_Funktsioonid.Models.FunktsiooniUurimine
+@{
+    ViewData["Title"] = "Detailid";
+}
+
+<h1>f(x) = @Model.Valem</h1>
+
+<ul class="list-group mb-4">
+    <li class="list-group-item"><b>Määramispiirkond:</b> @Model.Maaramispiirkond</li>
+    <li class="list-group-item"><b>Tuletis:</b> @Model.Tuletis</li>
+    <li class="list-group-item"><b>Kriitilised punktid:</b> @Model.KriitilisedPunktid</li>
+    <li class="list-group-item"><b>Ekstreemumid:</b> @Model.Ekstreemumid</li>
+</ul>
+
+<div style="max-width: 900px;">
+    <canvas id="funktsiooniGraafik" width="900" height="450"></canvas>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary mt-3">Tagasi nimekirja</a>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    // === 1. Формула из C# ===
+    const valem = "@Model.Valem".toLowerCase().replace(/\s/g, "");
+
+    // === 2. Парсер функции: ^ → ** и x → число ===
+    function f(x) {
+        try {
+            let expr = valem.replace(/\^/g, "**");
+            expr = expr.replace(/x/g, "(" + x + ")");
+            const r = Function('"use strict";return (' + expr + ')')();
+            return isFinite(r) ? r : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    // === 3. Численная производная (центральная разность) ===
+    function df(x, h) {
+        h = h || 0.001;
+        const a = f(x + h);
+        const b = f(x - h);
+        if (a === null || b === null) return null;
+        const r = (a - b) / (2 * h);
+        return isFinite(r) ? r : null;
+    }
+
+    // === 4. Генерируем точки ===
+    const xV = [];
+    const yF = [];
+    const yD = [];
+    let yMin = Infinity;
+    let yMax = -Infinity;
+
+    for (let x = -5; x <= 5; x += 0.1) {
+        const xr = Math.round(x * 100) / 100;
+        const y1 = f(xr);
+        const y2 = df(xr);
+
+        xV.push(xr.toFixed(2));
+        yF.push(y1);
+        yD.push(y2);
+
+        if (y1 !== null) {
+            if (y1 < yMin) yMin = y1;
+            if (y1 > yMax) yMax = y1;
+        }
+        if (y2 !== null) {
+            if (y2 < yMin) yMin = y2;
+            if (y2 > yMax) yMax = y2;
+        }
+    }
+
+    // Если ничего не посчиталось — дефолт
+    if (!isFinite(yMin) || !isFinite(yMax)) {
+        yMin = -10;
+        yMax = 10;
+    }
+
+    // Немного "воздуха"
+    const varu = (yMax - yMin) * 0.1 || 1;
+    yMin = yMin - varu;
+    yMax = yMax + varu;
+
+    // === 5. Рисуем ===
+    new Chart(document.getElementById('funktsiooniGraafik'), {
+        type: 'line',
+        data: {
+            labels: xV,
+            datasets: [
+                {
+                    label: 'f(x) = @Model.Valem',
+                    data: yF,
+                    borderColor: 'blue',
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 0,
+                    tension: 0.1,
+                    spanGaps: false
+                },
+                {
+                    label: "f'(x)",
+                    data: yD,
+                    borderColor: 'red',
+                    borderDash: [6, 4],
+                    borderWidth: 2,
+                    fill: false,
+                    pointRadius: 0,
+                    tension: 0.1,
+                    spanGaps: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    title: { display: true, text: 'x' }
+                },
+                y: {
+                    min: yMin,
+                    max: yMax,
+                    title: { display: true, text: 'y' }
+                }
+            },
+            plugins: {
+                legend: { position: 'top' },
+                tooltip: { mode: 'index', intersect: false }
+            }
+        }
+    });
+</script>

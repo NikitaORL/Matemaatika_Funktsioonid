@@ -1,0 +1,114 @@
+﻿@{
+    ViewData["Title"] = "Konspekt";
+}
+
+<h1>Konspekt: Funktsioonide uurimine</h1>
+
+<hr />
+
+<h2>1. Määramispiirkond</h2>
+<p>
+    Määramispiirkond on kõik x väärtused, mille korral funktsioon on olemas.
+</p>
+<ul>
+    <li>x³ − 3x → (−∞, ∞)</li>
+    <li>1/x → x ≠ 0</li>
+    <li>√x → x ≥ 0</li>
+    <li>ln(x) → x > 0</li>
+</ul>
+
+<h2>2. Tuletis f'(x)</h2>
+<p>
+    Tuletis näitab funktsiooni muutumise kiirust.
+</p>
+<p>
+    Valem: f'(x) = lim (f(x+h) − f(x)) / h, kui h → 0
+</p>
+<p>Põhivalemid:</p>
+<ul>
+    <li>(xⁿ)' = n·xⁿ⁻¹</li>
+    <li>(c)' = 0</li>
+    <li>(sin x)' = cos x</li>
+    <li>(cos x)' = −sin x</li>
+    <li>(eˣ)' = eˣ</li>
+    <li>(ln x)' = 1/x</li>
+</ul>
+<p>Näide: f(x) = x³ − 3x → f'(x) = 3x² − 3</p>
+
+<h2>3. Kriitilised punktid</h2>
+<p>
+    Kriitilised punktid on kohad, kus f'(x) = 0 või puudub.
+</p>
+<p>
+    Näide: 3x² − 3 = 0 → x = −1 ja x = 1
+</p>
+
+<h2>4. Ekstreemumid</h2>
+<p>
+    Ekstreemum on max või min. Tüübi määrab teine tuletis f''(x).
+</p>
+<ul>
+    <li>f''(x) &lt; 0 → max</li>
+    <li>f''(x) &gt; 0 → min</li>
+</ul>
+<p>
+    Näide: f''(x) = 6x
+</p>
+<ul>
+    <li>x = −1 → f(−1) = 2, f''(−1) = −6 → max</li>
+    <li>x = 1 → f(1) = −2, f''(1) = 6 → min</li>
+</ul>
+
+<h2>5. Kasvamine ja kahanemine</h2>
+<ul>
+    <li>f'(x) &gt; 0 → funktsioon kasvab</li>
+    <li>f'(x) &lt; 0 → funktsioon kahaneb</li>
+</ul>
+<p>
+    Näide: f'(x) = 3x² − 3
+</p>
+<ul>
+    <li>Kasvab: (−∞, −1) ja (1, ∞)</li>
+    <li>Kahaneb: (−1, 1)</li>
+</ul>
+
+<h2>6. Käänupunkt</h2>
+<p>
+    Käänupunkt on koht, kus kumerus muutub. Leitakse f''(x) = 0 järgi.
+</p>
+<p>
+    Näide: 6x = 0 → x = 0
+</p>
+
+<h2>7. Nullkohad</h2>
+<p>
+    Nullkohad on kohad, kus f(x) = 0.
+</p>
+<p>
+    Näide: x³ − 3x = 0 → x = −√3, 0, √3
+</p>
+
+<h2>8. Paarsus</h2>
+<ul>
+    <li>f(−x) = f(x) → paarisfunktsioon</li>
+    <li>f(−x) = −f(x) → paaritu funktsioon</li>
+</ul>
+<p>
+    Näide: x³ − 3x on paaritu, sest f(−x) = −f(x).
+</p>
+
+<hr />
+
+<h2>Kokkuvõte: f(x) = x³ − 3x</h2>
+<ul>
+    <li>Määramispiirkond: (−∞, ∞)</li>
+    <li>Nullkohad: x = −√3, 0, √3</li>
+    <li>Tuletis: f'(x) = 3x² − 3</li>
+    <li>Teine tuletis: f''(x) = 6x</li>
+    <li>Kriitilised punktid: x = −1, 1</li>
+    <li>Ekstreemumid: max = 2 (x=−1), min = −2 (x=1)</li>
+    <li>Käänupunkt: x = 0</li>
+    <li>Kasvab: (−∞, −1) ja (1, ∞)</li>
+    <li>Kahaneb: (−1, 1)</li>
+    <li>Paarsus: paaritu</li>
+</ul>

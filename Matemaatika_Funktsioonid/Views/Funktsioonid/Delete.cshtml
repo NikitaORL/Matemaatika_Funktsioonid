@@ -1,0 +1,26 @@
+﻿@model Matemaatika_Funktsioonid.Models.FunktsiooniUurimine
+@{
+    ViewData["Title"] = "Kustuta";
+}
+
+<h1>Kustuta funktsioon</h1>
+<h3>Oled kindel, et soovid selle kustutada?</h3>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-3">Valem</dt>
+        <dd class="col-sm-9">@Model.Valem</dd>
+
+        <dt class="col-sm-3">Määramispiirkond</dt>
+        <dd class="col-sm-9">@Model.Maaramispiirkond</dd>
+
+        <dt class="col-sm-3">Tuletis</dt>
+        <dd class="col-sm-9">@Model.Tuletis</dd>
+    </dl>
+
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id" />
+        <button type="submit" class="btn btn-danger">Kustuta</button>
+        <a asp-action="Index" class="btn btn-secondary">Tagasi</a>
+    </form>
+</div>
