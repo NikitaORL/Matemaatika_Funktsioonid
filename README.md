@@ -2,8 +2,6 @@ Funktsiooni uurimine — juhend testijale
 Sissejuhatus
 Funktsiooni uurimine on veebirakendus, mis on loodud matemaatiliste funktsioonide automaatseks analüüsiks. Kasutaja sisestab funktsiooni valemi (näiteks x^3 - 6*x + 3) ja rakendus teeb tema eest ära kogu selle rutiinse töö, mida tavaliselt tehakse käsitsi paberil: leiab määramispiirkonna, nullkohad, tuletise, kriitilised punktid ja ekstreemumid, seejärel joonistab graafiku ja näitab samm-sammulist lahendust.
 
-
-
 1. Mida rakendus teeb
 Rakenduse põhifunktsioonid:
 
@@ -14,7 +12,6 @@ Leiab nullkohad — lahendatakse võrrand f(x) = 0 ja kuvatakse kõik leitud lah
 Arvutab tuletise — rakendus leiab sümboolselt tuletise f'(x) ja näitab seda kasutajale eraldi väljana.
 
 Leiab kriitilised punktid — lahendatakse võrrand f'(x) = 0.
-
 
 2. Kasutatud tehnoloogiad
 Komponent	Tehnoloogia
@@ -119,4 +116,3 @@ Kontrolli, et uus valem oleks nimekirjas ja detailvaates näha.
 Kustutamise juures peaks rakendus küsima kinnitust (jah/ei). Pärast kustutamist:
 
 kirje ei tohi olla nimekirjas.
-
